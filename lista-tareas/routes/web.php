@@ -51,24 +51,28 @@ $tasks = [
 
 // Las rutas son las URL que el usuario puede visitar en la aplicación.
 
-Route::get('/', function () {
+Route::get('/', function () use ($tasks) {
     return view('index', [  // La data se pasara a la vista index en forma de arreglo asociativo
-        'name' => 'Sebastián'
+        'tasks' => $tasks
     ]);
-});
+})->name('tasks.index');
 
-Route::get('/hello', function () {
-    return 'Hola Mundo!';
-})->name('hello');
+Route::get('/{id}', function ($id) {
+    return 'Una tarea';
+})->name('tasks.show');
 
-Route::get('/greet/{name}', function ($name) { // {name} es un parámetro
-    return 'Hola, ' . $name . '!';
-});
+// Route::get('/hello', function () {
+//     return 'Hola Mundo!';
+// })->name('hello');
 
-Route::get('/hallo', function() {
-    // return redirect('/hello');
-    return redirect()->route('hello');
-});
+// Route::get('/greet/{name}', function ($name) { // {name} es un parámetro
+//     return 'Hola, ' . $name . '!';
+// });
+
+// Route::get('/hallo', function() {
+//     // return redirect('/hello');
+//     return redirect()->route('hello');
+// });
 
 // GET: es el método HTTP para obtener datos del servidor.
 // POST: es el método HTTP para enviar datos al servidor.
